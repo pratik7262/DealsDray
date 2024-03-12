@@ -15,9 +15,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { addEmployee } from "../../functions";
+import { addEmployee, updateEmployee } from "../../functions";
 import { convertBase64 } from "../../utils/base64";
 import Toast from "../Toast";
 
@@ -30,8 +31,10 @@ const Form = ({ edit }) => {
     gender: "",
     course: "",
   });
-
   const [img, setImg] = useState("");
+
+  const { id } = useParams();
+  const navigate = useNavigate();
   const onChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
     console.log(info);
@@ -62,6 +65,46 @@ const Form = ({ edit }) => {
       toast.error(adding.message);
     }
   };
+
+  const updateEmp = async () => {
+    const updating = await updateEmployee(info, img, id);
+
+    console.log(updating);
+    if (updating.success) {
+      toast.success(updating.message);
+      setTimeout(() => {
+        navigate("/list");
+      }, 2500);
+    } else {
+      toast.error(updating.message);
+    }
+  };
+
+  const getUser = async () => {
+    if (!id) {
+      return;
+    }
+    const response = await fetch(
+      `http://localhost/api/employee/getemployee/${id}`
+    );
+    const json = await response.json();
+    const { name, email, mobile, designation, gender, course } = json.employee;
+    setInfo({
+      name,
+      email,
+      mobile,
+      designation,
+      gender,
+      course,
+    });
+    setImg(json.employee.image);
+  };
+  useEffect(() => {
+    getUser();
+    console.log("first");
+    //eslint-disable-next-line
+  }, []);
+
   return (
     <Container>
       <Paper sx={{ p: 4, mt: 4 }} elevation={12}>
@@ -210,9 +253,9 @@ const Form = ({ edit }) => {
               size="large"
               sx={{ textTransform: "inherit" }}
               variant="contained"
-              onClick={addEmp}
+              onClick={edit ? updateEmp : addEmp}
             >
-              {edit ? "Edit Employee" : "Add Employee"}
+              {edit ? "Update" : "Add"}
             </Button>
           </Grid>
         </Grid>

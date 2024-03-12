@@ -20,11 +20,9 @@ import { Link, useNavigate } from "react-router-dom";
 // import { UserProfile } from "../UserProfile";
 import { useEffect, useState } from "react";
 import {
-  AutoStoriesOutlined,
   CloseOutlined,
   CreateOutlined,
   HomeOutlined,
-  LibraryBooksOutlined,
   ListAltOutlined,
 } from "@mui/icons-material";
 import { toast } from "react-toastify";
@@ -55,19 +53,6 @@ const Navbar = () => {
     },
   ];
 
-  const adminPages = [
-    {
-      title: "Books",
-      icon: <LibraryBooksOutlined sx={{ color: "black" }} />,
-      path: "/",
-    },
-    {
-      title: "Add Book",
-      icon: <AutoStoriesOutlined sx={{ color: "black" }} />,
-      path: "/addbook",
-    },
-  ];
-
   const onClick = () => {
     setOpen(true);
   };
@@ -77,9 +62,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    localStorage.getItem("isAdmin") === "true"
-      ? setPages(adminPages)
-      : setPages(userPages);
+    setPages(userPages);
     // eslint-disable-next-line
   }, []);
 
@@ -175,7 +158,7 @@ const Navbar = () => {
                 size="large"
                 sx={{ color: "white", textTransform: "inherit" }}
               >
-                Name
+                {localStorage.getItem("admin")}
               </Button>
               <Button
                 variant="outlined"

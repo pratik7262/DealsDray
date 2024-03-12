@@ -65,9 +65,11 @@ export const updateEmployee = async (req, res) => {
       new: true,
     });
 
-    res.status(200).json({ message: "Employee Updated Successfully" });
+    res
+      .status(200)
+      .json({ success: true, message: "Employee Updated Successfully" });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ success: true, message: error.message });
   }
 };
 

@@ -1,7 +1,9 @@
 import { Box, Button, Container, Paper, Typography } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Box
@@ -38,10 +40,22 @@ const Home = () => {
                 justifyContent: "space-between",
               }}
             >
-              <Button variant="contained" sx={{ textTransform: "inherit" }}>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  navigate("/create");
+                }}
+                sx={{ textTransform: "inherit" }}
+              >
                 Create Employee
               </Button>
-              <Button variant="contained" sx={{ textTransform: "inherit" }}>
+              <Button
+                onClick={() => {
+                  navigate("/list");
+                }}
+                variant="contained"
+                sx={{ textTransform: "inherit" }}
+              >
                 Employee List
               </Button>
             </Box>

@@ -31,3 +31,20 @@ export const addEmployee = async (info, image) => {
 
   return json;
 };
+
+export const updateEmployee = async (info, image, id) => {
+  const response = await fetch(`http://localhost/api/employee/update/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...info,
+      image,
+    }),
+  });
+
+  const json = await response.json();
+
+  return json;
+};

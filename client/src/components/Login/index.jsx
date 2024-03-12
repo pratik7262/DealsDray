@@ -34,7 +34,9 @@ const Login = () => {
     }
     if (logging.success) {
       toast.success(logging.message);
+      console.log(logging);
       localStorage.setItem("token", logging.token);
+      localStorage.setItem("admin", logging.admin.username);
       setTimeout(() => {
         navigate("/");
         window.location.reload();
