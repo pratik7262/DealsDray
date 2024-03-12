@@ -14,6 +14,6 @@ router.post("/create", employeeValidation, cereateEmployee);
 router.get("/get", getEmployees);
 router.get("/getemployee/:id", getEmployee);
 router.patch("/update/:id", employeeValidation, updateEmployee);
-router.delete("/delete/:id", deleteEmployee);
+router.get("/delete/:id", deleteEmployee);
 
 export default router;

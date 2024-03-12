@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import Form from "./components/Form";
 import Home from "./components/Home";
+import List from "./components/List";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 
@@ -16,6 +17,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/create" element={<Form />} />
               <Route path="/edit/:id" element={<Form edit />} />
+              <Route path="/list" element={<List />} />
             </Routes>
           </>
         ) : (
