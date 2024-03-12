@@ -25,3 +25,7 @@ After installation run following command
 ```bash
     npm start
 ```
+
+Login Credentials
+username: Admin 1
+password: 1234567890
